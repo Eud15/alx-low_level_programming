@@ -1,24 +1,21 @@
 #include <stdio.h>
-#include "main.h"
 
 /**
- * main - computes and prints the sum of all the multiples of 3 or 5
+ * main - Entry point
  *
- * Return: Nothing
+ * Return: Always 0 (Success)
  */
+
 int main(void)
 {
-	int counter = 1;
+	int i, sum = 0;
 
-	for (; counter <= 1024; counter++)
+	for (i = 0; i < 1024; i++)
 	{
-		if (counter % 3 == 0 || counter % 5 == 0)
-		{
-			printf("%i", counter);
-			if (counter < 1024)
-				printf(", ");
-		}
+		if ((i % 5) == 0 || (i % 3) == 0)
+			sum += i;
 	}
-	printf("\n");
+	printf("%d\n", sum);
+
 	return (0);
 }
