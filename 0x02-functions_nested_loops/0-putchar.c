@@ -1,4 +1,4 @@
-#include "holberton.h"
+#include "main.h"
 /**
  * main - starts the program
  *
@@ -6,7 +6,7 @@
  */
 int main(void)
 {
-	char string[] = "Holberton";
+	char string[] = "main";
 	int ind = 0;
 
 		while (string[ind])
