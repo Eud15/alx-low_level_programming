@@ -38,6 +38,7 @@ void times_table(void)
 
 			else if (tens < 10)
 			{
+
 				_putchar (tens + '0');
 				_putchar (ones + '0');
 			}
