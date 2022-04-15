@@ -1,80 +1,48 @@
+#include <stdlib.h>
 #include "dog.h"
-
-
 /**
-*_strlen - returns length of
-*a string
-*@str: string to be counted
-*Return: returns length of string
-*/
-int _strlen(char *str)
-{
-int len = 0;
-while (str)
-len++;
-
-return (len);
-}
-
-
-/**
-*_strcopy - copy string pointed by src
-*into dest variable
-*@dest:buffer storing string copy
-*@src: buffer storing string to copy
-*Return:returns copied string
-*/
-char *_strcopy(char *dest, char *src)
-{
-int index = 0;
-
-for (; src[index] ; index++)
-dest[index] = src[index];
-
-dest[index] = '\0';
-return (dest);
-}
-
-
-
-
-/**
-*new_dog - creates a new dog
-*@name: name of new dog
-*@age: age of new dog
-*@owner: owner of new dog
-*Return: returns NULL in case
-*of failure
-*/
+ * new_dog - new dog
+ * @name: name's dog
+ * @age: age's dog
+ * @owner: owner's dog
+ *
+ * Return: a pointer with the new structure
+ */
 dog_t *new_dog(char *name, float age, char *owner)
 {
-dog_t *doggo;
+	dog_t *new_dog;
+	int i, new_name, new_owner;
 
-if (name == NULL || age < 0 || owner == NULL)
-return (NULL);
+	new_dog = malloc(sizeof(dog_t));
+	if (new_dog == NULL || !name || !owner)
+	{
+		free(new_dog);
+		return (NULL);
+	}
 
-doggo = malloc(sizeof(dog_t));
-if (doggo == NULL)
-return (NULL);
+	for (new_name = 0 ; name[new_name] ; new_name++)
+		;
+	for (new_owner = 0 ; owner[new_owner] ; new_owner++)
+		;
 
-doggo->name = malloc(sizeof(char) * (_strlen(name) + 1));
-if (doggo->name == NULL)
-{
-free(doggo);
-return (NULL);
-}
+	new_dog->name = malloc(new_name + 1);
+	new_dog->owner = malloc(new_owner + 1);
 
-doggo->owner = malloc(sizeof(char) * (_strlen(owner) + 1));
-if (doggo->owner == NULL)
-{
-free(doggo->name);
-free(doggo);
-return (NULL);
-}
+	if (!new_dog->name || !new_dog->owner)
+	{
+		free(new_dog->owner);
+		free(new_dog->name);
+		free(new_dog);
+		return (NULL);
+	}
 
-doggo->name = _strcopy(doggo->name, name);
-doggo->age = age;
-doggo->owner = _strcopy(doggo->owner, owner);
+	for (i = 0 ; i < new_name ; i++)
+		new_dog->name[i] = name[i];
+	new_dog->name[i] = '\0';
+	new_dog->age = age;
 
-return (doggo);
+	for (i = 0 ; i < new_owner ; i++)
+		new_dog->owner[i] = owner[i];
+	new_dog->owner[i] = '\0';
+	return (new_dog);
 }
